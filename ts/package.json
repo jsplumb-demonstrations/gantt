@@ -17,7 +17,7 @@
     },
     "homepage": "https://github.com/jsplumb-demonstrations/gantt#readme",
     "dependencies": {
-        "@jsplumbtoolkit/browser-ui": "file:../../../toolkit-6/dist/browser-ui/jsplumbtoolkit-browser-ui.tgz"
+        "@jsplumbtoolkit/browser-ui": "^6.23.0"
     },
     "devDependencies": {
         "@types/node": "14.17.3",
