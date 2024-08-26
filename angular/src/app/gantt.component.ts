@@ -1,5 +1,5 @@
 import {AfterViewInit, Component, Input, OnInit, ViewChild} from "@angular/core"
-import {AngularRenderOptions, BrowserUIAngular, jsPlumbSurfaceComponent} from "@jsplumbtoolkit/browser-ui-angular"
+import {AngularRenderOptions, BrowserUIAngular, SurfaceComponent} from "@jsplumbtoolkit/browser-ui-angular"
 import {ColorGenerator, RandomColorGenerator, today} from "../util"
 import {GANTT, ROW_HEIGHT, STEP_WIDTH, TYPE_MILESTONE, TYPE_TASK, TYPE_TASK_GROUP} from "../constants"
 import {TaskComponent} from "./task.component"
@@ -54,7 +54,7 @@ export class GanttComponent implements Gantt, AfterViewInit, OnInit {
   @Input() chartId!:string
   @Input() options!:GanttOptions
 
-  @ViewChild(jsPlumbSurfaceComponent) surfaceComponent!:jsPlumbSurfaceComponent;
+  @ViewChild(SurfaceComponent) surfaceComponent!:SurfaceComponent;
   toolkit!:BrowserUIAngular
   surface!:Surface
 
