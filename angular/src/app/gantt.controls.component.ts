@@ -8,7 +8,6 @@ import {GanttService} from "./gantt.service"
     <button (click)="addTask()">NEW TASK</button>
     <button (click)="addTaskGroup()">NEW TASK GROUP</button>
     <button (click)="addMilestone()">NEW MILESTONE</button>
-    <div id="inspector"></div>
     <button (click)="exportToConsole()">EXPORT TO CONSOLE</button>
   </div>
     

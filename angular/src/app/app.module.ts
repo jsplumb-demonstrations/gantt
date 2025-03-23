@@ -9,10 +9,11 @@ import {MilestoneComponent} from "./milestone.component"
 import {GanttComponent} from "./gantt.component"
 import {GanttService} from "./gantt.service"
 import {GanttControlsComponent} from "./gantt.controls.component"
+import {GanttInspector} from "./gantt.inspector"
 
 @NgModule({
   declarations: [
-    AppComponent, TaskComponent, TaskGroupComponent, MilestoneComponent, GanttComponent, GanttControlsComponent
+    AppComponent, TaskComponent, TaskGroupComponent, MilestoneComponent, GanttComponent, GanttControlsComponent, GanttInspector
   ],
   imports: [
     BrowserModule, jsPlumbToolkitModule

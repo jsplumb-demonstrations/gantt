@@ -1,5 +1,4 @@
 @import "../node_modules/@jsplumbtoolkit/browser-ui/css/jsplumbtoolkit.css";
-@import "../node_modules/@jsplumbtoolkit/browser-ui/css/jsplumbtoolkit-dialogs.css";
 
 
 :root {
@@ -21,11 +20,42 @@ jsplumb-surface, .jtk-surface {
 
 #jtk-demo-gantt {
   display:flex;
+  flex-direction: column;
   width:100vw;
 }
 
 jtk-gantt {
   flex-grow:1;
+}
+
+jtk-gantt-inspector {
+  display:none;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 250px;
+  background-color: white;
+  padding: 1rem;
+  height: 100%;
+  z-index: 50;
+  opacity: 0.95;
+  border-left: 1px solid #CCC;
+}
+
+jtk-gantt-inspector.jtk-inspector-active {
+  display:block;
+}
+
+/* --- button bar ----- */
+
+.jtk-demo-gantt-buttons {
+  display:flex;
+  align-items:center;
+  padding:0.25rem;
+}
+
+.jtk-demo-gantt-buttons > button {
+  margin:0.25rem;
 }
 
 /* ----------- main chart styles -------------- */
@@ -43,11 +73,11 @@ jtk-gantt {
 .jtk-gantt-controls {
   padding:0.25rem;
   display:flex;
-  flex-direction: column;
 }
 
 .jtk-gantt-controls button {
   margin:0.5rem;
+  font-size:14px;
 }
 
 /* --------- timeline headers ------------------------ */

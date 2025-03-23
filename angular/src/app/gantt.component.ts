@@ -145,9 +145,6 @@ export class GanttComponent implements Gantt, AfterViewInit, OnInit {
   }
 
   renderParams:AngularRenderOptions = {
-    layout:{
-      type:AbsoluteLayout.type
-    },
     defaults:{
       anchors:[
         AnchorLocations.ContinuousRight, AnchorLocations.ContinuousLeft
@@ -158,8 +155,7 @@ export class GanttComponent implements Gantt, AfterViewInit, OnInit {
           stub:15,
           alwaysRespectStubs:true
         }
-      },
-      endpoint:BlankEndpoint.type
+      }
     },
     dragOptions:{
       // this drag constrain function constrains the node to only drag in the X axis.
@@ -167,7 +163,7 @@ export class GanttComponent implements Gantt, AfterViewInit, OnInit {
       constrainFunction:(desiredLoc: PointXY, dragEl: HTMLElement, constrainRect: Size, size: Size, currentLoc: PointXY) => {
         return {x:Math.max(0, desiredLoc.x), y:currentLoc.y}
       },
-      filter:".jtk-draw-handle, .jtk-gantt-day-stripe, .jtk-gantt-day-stripe-alt, .jtk-gantt-day-stripes"
+      filter:".jtk-gantt-day-stripe, .jtk-gantt-day-stripe-alt, .jtk-gantt-day-stripes"
     },
     consumeRightClick:false,
     plugins:[
