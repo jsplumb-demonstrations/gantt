@@ -23,12 +23,12 @@ const CLASS_DAY_STRIPE_ALT = "jtk-gantt-day-stripe-alt"
 function createTemplateParser(gantt:Gantt) {
     return newRecadoInstance({
         templates:{
-            [FIXED_ELEMENT_LABELS]:`<div class="jtk-gantt-task-labels">
+            [FIXED_ELEMENT_LABELS]:`<div class="jtk-gantt-task-labels" data-jtk-not-draggable="true">
                     <r-each in="entries" key="id">
                         <div data-jtk-type="{{type}}" class="jtk-gantt-task-label" style="height:${gantt.rowHeight}px;margin-left:{{indent}}rem">{{name}}</div>
                         </r-each>
                         </div>`,
-            [FIXED_ELEMENT_TIMELINE]:`<div class="jtk-gantt-timeline" style="width:{{width}}px">
+            [FIXED_ELEMENT_TIMELINE]:`<div class="jtk-gantt-timeline" style="width:{{width}}px" data-jtk-not-draggable="true">
                     <r-each in="headers" key="id">
                         <div class="jtk-gantt-timeline-row jtk-gantt-timeline-{{id}}">
                             <r-each in="values" id="id">
