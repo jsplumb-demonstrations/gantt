@@ -24,11 +24,12 @@
     },
     "homepage": "https://github.com/jsplumb-demonstrations/gantt#readme",
     "devDependencies": {
-        "@jsplumbtoolkit/browser-ui": "^7.0.0",
         "babel-cli": "^6.26.0",
         "babel-preset-env": "^1.7.0",
         "esbuild": "0.17.18",
         "http-server": "14.1.1"
     },
-    "dependencies": {}
+    "dependencies": {
+        "@jsplumbtoolkit/browser-ui": "^7.0.0"
+    }
 }
