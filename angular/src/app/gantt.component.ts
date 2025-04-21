@@ -4,7 +4,7 @@ import {
   BrowserUIAngular,
   SurfaceComponent
 } from "@jsplumbtoolkit/browser-ui-angular"
-import {ColorGenerator, RandomColorGenerator, today} from "../util"
+import {ColorGenerator, millisecondsToDays, pixelsToMilliseconds, RandomColorGenerator, today} from "../util"
 import {GANTT, ROW_HEIGHT, STEP_WIDTH, TYPE_MILESTONE, TYPE_TASK, TYPE_TASK_GROUP} from "../constants"
 import {TaskComponent} from "./task.component"
 import {Gantt, GanttOptions, InternalTask} from "../defs"
@@ -172,17 +172,17 @@ export class GanttComponent implements Gantt, AfterViewInit, OnInit {
         options:{
           widthAttribute:"size",
           payloadGenerator:(node:Node, payload:InternalTask) => {
-            const newStart = this.minValue + this.pixelsToMilliseconds(payload.left)
-            const newEnd = newStart + this.pixelsToMilliseconds(payload.size)
+            const newStart = this.minValue + pixelsToMilliseconds(payload.left)
+            const newEnd = newStart + pixelsToMilliseconds(payload.size)
             return {
               start:newStart,
               end:newEnd,
-              dayRange:Math.floor(this.millisecondsToDays(newEnd - newStart))
+              dayRange:Math.floor(millisecondsToDays(newEnd - newStart))
             }
           },
-          onEdit:(task:Node) => {
+          onEdit:(task:Node, surface:Surface) => {
             this._recalc(task)
-            this.surface.relayout()
+            surface.relayout()
           }
         }
       },
@@ -205,8 +205,8 @@ export class GanttComponent implements Gantt, AfterViewInit, OnInit {
       size:{w:STEP_WIDTH, h:ROW_HEIGHT}
     },
     events:{
-      [EVENT_CANVAS_CLICK]:() => {
-        this.toolkit.clearSelection()
+      [EVENT_CANVAS_CLICK]:(surface:Surface) => {
+        surface.toolkitInstance.clearSelection()
       }
     }
   }
@@ -215,8 +215,8 @@ export class GanttComponent implements Gantt, AfterViewInit, OnInit {
     nodes:{
       selectable:{
         events:{
-          [EVENT_TAP]:(p:{obj:Base}) => {
-            this.toolkit.setSelection(p.obj)
+          [EVENT_TAP]:(p:{obj:Base, toolkit:BrowserUIAngular}) => {
+            p.toolkit.setSelection(p.obj)
           }
         },
         inputs:{
@@ -465,9 +465,9 @@ export class GanttComponent implements Gantt, AfterViewInit, OnInit {
   }
 
   private _taskMoved(p:{vertex:Node}) {
-    const startMillis = this.minValue + this.pixelsToMilliseconds(p.vertex.data['left'])
-    const endMillis = startMillis + this.pixelsToMilliseconds(p.vertex.data['size'])
-    const dayRange = this.millisecondsToDays(endMillis - startMillis)
+    const startMillis = this.minValue + pixelsToMilliseconds(p.vertex.data['left'])
+    const endMillis = startMillis + pixelsToMilliseconds(p.vertex.data['size'])
+    const dayRange = millisecondsToDays(endMillis - startMillis)
 
     this.minValue = Math.min(startMillis, this.minValue)
     this.maxValue = Math.max(endMillis, this.maxValue)
@@ -483,14 +483,6 @@ export class GanttComponent implements Gantt, AfterViewInit, OnInit {
 
   assignColor():string {
     return this.colorGenerator.generate()
-  }
-
-  pixelsToMilliseconds(px:number) {
-    return  px / STEP_WIDTH * ONE_DAY_IN_MILLISECONDS
-  }
-
-  millisecondsToDays(ms:number) {
-    return ms / ONE_DAY_IN_MILLISECONDS
   }
 
   exportToConsole() {

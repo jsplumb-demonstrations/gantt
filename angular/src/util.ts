@@ -1,4 +1,4 @@
-import {ONE_DAY_IN_MILLISECONDS} from "./constants"
+import {ONE_DAY_IN_MILLISECONDS, STEP_WIDTH} from "./constants"
 
 export const NARROW_DAY_FORMAT = new Intl.DateTimeFormat("default", { weekday: "narrow" })
 export const SHORT_DAY_FORMAT = new Intl.DateTimeFormat("default", { weekday: "short" })
@@ -146,4 +146,12 @@ export class StaticColorGenerator implements ColorGenerator {
         }
         return c
     }
+}
+
+export function pixelsToMilliseconds(px:number):number {
+  return  px / STEP_WIDTH * ONE_DAY_IN_MILLISECONDS
+}
+
+export function millisecondsToDays(ms:number):number {
+  return ms / ONE_DAY_IN_MILLISECONDS
 }

@@ -8,7 +8,7 @@ import {
 
 import {ONE_WEEK_IN_MILLISECONDS, STEP_WIDTH} from "./constants"
 import {Gantt} from "./defs"
-import {NARROW_DAY_FORMAT, getWeekOfYear, MONTH_FORMAT, SHORT_DAY_FORMAT} from "./util"
+import {NARROW_DAY_FORMAT, getWeekOfYear, MONTH_FORMAT, SHORT_DAY_FORMAT, millisecondsToDays} from "./util"
 import {TaskEntry, TimelineHeaderEntry} from "./defs"
 
 
@@ -91,7 +91,6 @@ export class GanttDecorator extends Decorator {
      * chart is visible in the viewport.
      */
     zoomToVisible() {
-
         this.panToVisible()
         this.adapter.zoomToDecorator({decorator:this})
     }
@@ -139,7 +138,7 @@ export class GanttDecorator extends Decorator {
                 start,
                 end,
                 label:`Week ${currentWeekDetails[0]}`,
-                size:STEP_WIDTH * this.gantt.millisecondsToDays(end - start),
+                size:STEP_WIDTH * millisecondsToDays(end - start),
                 id:`week_${weeks.length}`,
                 type:"week"
             })
@@ -170,7 +169,7 @@ export class GanttDecorator extends Decorator {
                 start:start,
                 end:end,
                 label:monthName,
-                size:STEP_WIDTH * this.gantt.millisecondsToDays(end - start),
+                size:STEP_WIDTH * millisecondsToDays(end - start),
                 id:`month_${start}`,
                 type:"month"
             })
@@ -209,7 +208,7 @@ export class GanttDecorator extends Decorator {
                 start:start,
                 end:end,
                 label,
-                size:STEP_WIDTH * this.gantt.millisecondsToDays(end - start),
+                size:STEP_WIDTH * millisecondsToDays(end - start),
                 id:`quarter_${start}`,
                 type:"quarter"
             })
@@ -222,7 +221,7 @@ export class GanttDecorator extends Decorator {
 
     private _decorateTimeline(params:DecorateParams) {
 
-        const dayRange = this.gantt.millisecondsToDays(this.gantt.maxValue - this.gantt.minValue)
+        const dayRange = millisecondsToDays(this.gantt.maxValue - this.gantt.minValue)
 
         const headers:Array<TimelineHeaderEntry> = []
         if (this.gantt.showDays) {
@@ -252,7 +251,7 @@ export class GanttDecorator extends Decorator {
     private _decorateBody(params:DecorateParams) {
 
         const stripeHeight = params.toolkit.getNodes().length * this.gantt.rowHeight
-        const dayRange = this.gantt.millisecondsToDays(this.gantt.maxValue - this.gantt.minValue)
+        const dayRange = millisecondsToDays(this.gantt.maxValue - this.gantt.minValue)
 
         const days = []
         let flipflop = false
@@ -276,7 +275,7 @@ export class GanttDecorator extends Decorator {
         const rightNow = new Date().getTime()
         if (this.gantt.minValue < rightNow && this.gantt.maxValue > rightNow) {
             const rn = this.templateParser.template(FIXED_ELEMENT_RIGHT_NOW, {height:stripeHeight}).childNodes[0] as BrowserElement
-            const xLocDays = this.gantt.millisecondsToDays(rightNow - this.gantt.minValue)
+            const xLocDays = millisecondsToDays(rightNow - this.gantt.minValue)
             params.fixElement(rn, {x:xLocDays * STEP_WIDTH, y:0}, {
                 top:true
             })

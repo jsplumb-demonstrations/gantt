@@ -52,7 +52,6 @@ export interface Gantt {
   entries:Array<TaskEntry>
   entryMap:Map<string, TaskEntry>
   dayNameFormat:"short"|"narrow"
-  millisecondsToDays:(m:number) => number
 
   showDays:boolean
   showWeekOfYear:boolean
