@@ -1,17 +1,20 @@
 import {AfterViewInit, Component, inject, Input, OnInit, ViewChild} from "@angular/core"
-import {AngularRenderOptions, BrowserUIAngular, SurfaceComponent} from "@jsplumbtoolkit/browser-ui-angular"
+import {
+  AngularRenderOptions,
+  BrowserUIAngular,
+  SurfaceComponent
+} from "@jsplumbtoolkit/browser-ui-angular"
 import {ColorGenerator, RandomColorGenerator, today} from "../util"
 import {GANTT, ROW_HEIGHT, STEP_WIDTH, TYPE_MILESTONE, TYPE_TASK, TYPE_TASK_GROUP} from "../constants"
 import {TaskComponent} from "./task.component"
 import {Gantt, GanttOptions, InternalTask} from "../defs"
 import {ActiveFilteringPlugin,
   Node,
-  AbsoluteLayout, EVENT_TAP,
+  EVENT_TAP,
   Base, Surface, PlainArrowOverlay,
   AnchorLocations,
   Edge,
   OrthogonalConnector,
-  BlankEndpoint,
   DrawingToolsPlugin,
   PointXY,
   Size,
