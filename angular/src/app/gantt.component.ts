@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, Input, OnInit, ViewChild} from "@angular/core"
+import {AfterViewInit, Component, inject, Input, OnInit, ViewChild} from "@angular/core"
 import {AngularRenderOptions, BrowserUIAngular, SurfaceComponent} from "@jsplumbtoolkit/browser-ui-angular"
 import {ColorGenerator, RandomColorGenerator, today} from "../util"
 import {GANTT, ROW_HEIGHT, STEP_WIDTH, TYPE_MILESTONE, TYPE_TASK, TYPE_TASK_GROUP} from "../constants"
@@ -43,9 +43,7 @@ import {GanttService} from "./gantt.service"
                      [toolkitId]="chartId"
                      [view]="view"
                      [renderParams]="renderParams"
-                     [toolkitParams]="toolkitParams">
-
-    </jsplumb-surface>
+                     [toolkitParams]="toolkitParams"/>
 
   </div>`
 })
@@ -83,8 +81,7 @@ export class GanttComponent implements Gantt, AfterViewInit, OnInit {
   rowHeight!:number
   barHeight!:number
 
-  constructor(private ganttService:GanttService) {
-  }
+  ganttService = inject(GanttService)
 
   ngOnInit() {
 
