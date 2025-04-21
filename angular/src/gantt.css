@@ -1,0 +1,309 @@
+:root {
+  --jtk-gantt-color-draw-tools: #21840e;
+  --jtk-gantt-color-day-stripe-alt:#f9f9f9;
+  --jtk-gantt-color-decoration-border:#999999;
+
+  --jtk-gantt-draw-handle-size:4px;
+}
+
+/* ----------- main chart styles -------------- */
+
+.jtk-gantt {
+  display:flex;
+  outline:1px solid;
+  height:800px;
+}
+
+.jtk-demo-rhs button {
+  margin:0.5rem;
+}
+
+.jtk-gantt-controls {
+  padding:0.25rem;
+  display:flex;
+}
+
+.jtk-gantt-controls button {
+  margin:0.5rem;
+  font-size:14px;
+}
+
+/* --------- timeline headers ------------------------ */
+
+.jtk-gantt-timeline {
+  display:flex;
+  flex-direction: column;
+  z-index: 51;
+  background-color: white;
+  opacity: 0.95;
+}
+
+.jtk-gantt-timeline-row {
+  display:flex;
+  align-items: center;
+}
+
+.jtk-gantt-timeline-entry {
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  flex-grow: 0;
+  flex-shrink: 0;
+  font-weight:bold;
+  overflow: hidden;
+  border:1px solid var(--jtk-gantt-color-decoration-border);
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.jtk-gantt-day-name {
+  color:gray;
+}
+
+
+/* ------------ Task labels -------------------------- */
+
+.jtk-gantt-task-labels {
+  display:flex;
+  flex-direction: column;
+  background-color: white;
+  z-index: 50;
+  opacity: 0.95;
+  padding: 0 0.5rem;
+  border-right: 2px solid var(--jtk-gantt-color-decoration-border);
+}
+
+.jtk-gantt-task-label {
+
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+
+}
+
+[data-jtk-type='taskGroup'] {
+  font-weight:bold;
+}
+
+/* ----------- task bars ----------------------------- */
+
+/* styles for the task bars, group + individual task */
+.jtk-gantt-task, .jtk-gantt-task-group, .jtk-gantt-milestone {
+  display: flex;
+  align-items: center;
+  z-index:2;
+  opacity: 0.9;
+}
+
+.jtk-gantt-milestone {
+  background-color:white;
+}
+
+.jtk-gantt-milestone-body {
+  width:100%;
+  height:100%;
+  transform: rotate(45deg);
+}
+
+/* the number showing the current progress, may be hidden */
+.jtk-gantt-progress-value {
+  position:absolute;
+  right:0.5rem;
+  top:50%;
+  transform: translate(0, -50%);
+  z-index:3;
+}
+
+/* append '%' to the progress value */
+.jtk-gantt-progress-value::after {
+  content:"%";
+}
+
+/* the gauge provides the visual key of the progress */
+.jtk-gantt-progress-gauge {
+  z-index:2;
+  background-color: white;
+  opacity:0.6;
+  position:absolute;
+  left:0;
+  top:0;
+  bottom:0;
+}
+
+.jtk-gantt-delete, .jtk-gantt-connect {
+  position: absolute;
+  right: -20px;
+  transform: translate(50%, -50%);
+  border-radius: 50%;
+  width: 0.6rem;
+  height: 0.6rem;
+  color: white;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 4px;
+  font-weight: bold;
+}
+
+.jtk-gantt-delete {
+  top: 25%;
+  background-color: red;
+}
+
+.jtk-gantt-connect {
+  top: 75%;
+  background-color: forestgreen;
+}
+
+
+
+.jtk-surface-selected-element {
+  border: none;
+}
+
+.jtk-surface-selected-element .jtk-gantt-delete, .jtk-surface-selected-element .jtk-gantt-connect {
+  display:flex;
+}
+
+/*
+* Hide progress value and gauge if the `data-jtk-show-progress` attribute is set to false (Can be set on each task bar
+ * individually or on the chart as a whole.
+ */
+[data-jtk-show-progress='false'] .jtk-gantt-progress-value, [data-jtk-show-progress='false'] .jtk-gantt-progress-gauge {
+  display:none;
+}
+
+
+/* ----------------------- drawing tools --------------------- */
+
+
+div.jtk-draw-skeleton {
+  outline: 1px solid var(--jtk-gantt-color-draw-tools);
+  outline-offset: var(--jtk-gantt-draw-handle-size);
+}
+
+.jtk-draw-handle {
+  background-color: var(--jtk-gantt-color-draw-tools);
+  cursor:pointer;
+}
+
+.jtk-draw-handle-tr {
+  right:-4px;
+  top:-4px;
+}
+
+.jtk-draw-handle-br {
+  right:-4px;
+  bottom:-4px;
+}
+
+.jtk-draw-handle-tl {
+  left:-4px;
+  top:-4px;
+}
+
+.jtk-draw-handle-bl {
+  left:-4px;
+  bottom:-4px;
+}
+
+
+/* ------- stripes -------- */
+.jtk-gantt-day-stripes {
+  display:flex;
+  z-index:0;
+  pointer-events: none;
+}
+
+.jtk-gantt-day-stripe {
+  background-color:white;
+  flex-shrink: 0;
+  flex-grow: 0;
+}
+
+.jtk-gantt-day-stripe-alt {
+  background-color:var(--jtk-gantt-color-day-stripe-alt);
+  flex-shrink: 0;
+  flex-grow: 0;
+}
+
+/* ------ current date indicator line ------------- */
+
+.jtk-gantt-right-now {
+  width:1px;
+  border-left:2px dotted darkcyan;
+  z-index:5;
+}
+
+/* -------------- edges ---------------- */
+.jtk-gantt .jtk-connector {
+  z-index:1;
+  stroke:var(--jtk-gantt-color-draw-tools);
+}
+
+.jtk-gantt .jtk-connector path {
+  stroke:var(--jtk-gantt-color-draw-tools);
+}
+
+/* -------------- inspector ------------------- */
+
+.jtk-gantt-inspector {
+  display: flex;
+  flex-direction: column;
+  padding: 0.25rem;
+}
+
+.jtk-gantt-inspector input {
+  height:40px;
+  margin:0.25rem;
+}
+
+.jtk-gantt-inspector [type='range'] {
+  flex-grow: 1;
+}
+
+.jtk-gantt-progress-value-label:after {
+  content:"%";
+}
+
+/* --------------------- dialogs ------------------------------------ */
+.jtk-gantt-dialog {
+  display:flex;
+  flex-direction: column;
+}
+
+.jtk-gantt-dialog select {
+  height:40px;
+  margin:0.25rem;
+}
+
+/* ---------- dependency dragging ----------------- */
+[data-jtk-enabled='false'] {
+  opacity:0.7;
+}
+
+.jtk-drag-hover {
+  background-color: darkmagenta !important;
+}
+
+.jtk-gantt-milestone.jtk-drag-hover {
+  background-color: white !important;
+}
+
+.jtk-drag-hover .jtk-gantt-milestone-body {
+  background-color: darkmagenta !important;
+}
+
+/* --- button bar ----- */
+
+.jtk-demo-gantt-buttons {
+  display:flex;
+  align-items:center;
+  padding:0.25rem;
+}
+
+.jtk-demo-gantt-buttons > button {
+  margin:0.25rem;
+}
