@@ -498,7 +498,7 @@ export class Gantt {
     }
 
     private _computeExtents() {
-        let _min = Infinity, _max = -Infinity
+        let _min = this.minValue, _max = this.maxValue
         const _one = function(entry:TaskEntry) {
             _min = Math.min(_min, entry.node.data.start)
             _max = Math.max(_max, entry.node.data.end)
