@@ -1,0 +1,19 @@
+.jtk-gantt-container {
+    display:flex;
+}
+
+.jtk-gantt-labels {
+    display:flex;
+}
+
+.jtk-gantt-labels-header {
+    min-width:150px;
+    background-color:lightgrey;
+    padding:0.25rem;
+}
+
+.jtk-gantt-rhs {
+    display:flex;
+    flex-direction: column;
+    flex-grow:1;
+}
