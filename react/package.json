@@ -1,7 +1,7 @@
 {
     "name": "react",
     "private": true,
-    "version": "7.3.1",
+    "version": "7.3.3",
     "type": "module",
     "scripts": {
         "dev": "vite",
@@ -12,7 +12,7 @@
     "dependencies": {
         "react": "^19.0.0",
         "react-dom": "^19.0.0",
-        "@jsplumbtoolkit/browser-ui-react": "^7.3.1"
+        "@jsplumbtoolkit/browser-ui-react": "^7.3.3"
     },
     "devDependencies": {
         "@eslint/js": "^9.22.0",
